@@ -1,6 +1,6 @@
 #!/bin/sh
 ### This is only if your location isn't automatically detected, otherwise you can leave it blank.
-location=""
+location="Bratislava"
 
 [ "$location" != "" ] && location="$location+"
 
