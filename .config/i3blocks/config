@@ -55,5 +55,5 @@ interval=30
 
 [wifi]
 command=i3wifi
-instance=wlp2s0
+instance=wlp5s0
 interval=10
