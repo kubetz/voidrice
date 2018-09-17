@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# directory that contains your git repositories
+devdir="/home/kubetz/Development"
+
+# connectivity check
+ping -q -w 1 -c 1 "$(ip r | grep default | tail -1 | cut -d ' ' -f 3)" >/dev/null || exit
+
+# fingers crossed that people are sane and their directories doesn't contain whitespaces
+repos=$(find $devdir -name .git -type d)
+
+# common part of git rev command executed for both origin and upstream
+gitrev="git rev-list --left-only --count"
+
+for repo in $repos
+do
+	cd $repo/..; git fetch --all >/dev/null 2>&1
+	org=$($gitrev origin/master...@)
+	ups=$($gitrev upstream/master...@)
+
+	# if there are any remote changes, append name of the repo and..
+	# ..how many commits are we behind on both origin and usptream
+	[[ $org -ne 0 || $ups -ne 0 ]] && found+=" ${PWD##*/}($org|$ups)"
+done
+
+echo -n $found
