@@ -28,6 +28,7 @@ signal=7
 color=#D33682
 
 [repositories]
+label=🖧
 command=i3repocheck
 interval=300
 color=#00FF00
