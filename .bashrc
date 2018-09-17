@@ -15,6 +15,7 @@ alias progs="(pacman -Qet && pacman -Qm) | sort -u" # List programs I've install
 alias orphans="pacman -Qdt" # List orphan programs
 alias sdn="sudo shutdown now"
 alias psref="gpg-connect-agent RELOADAGENT /bye" # Refresh gpg
+alias sshadd="ssh-add ~/.ssh/id_rsa"
 
 # Some aliases
 alias p="sudo pacman"
