@@ -93,7 +93,7 @@ bar {
 	position top
 	mode dock
 	modifier None
-	tray_output DVI-D-0
+	tray_output primary
 }
 
 # #---Basic Bindings---# #
@@ -129,7 +129,7 @@ bindsym $mod+r 			exec $term -e ranger
 bindsym $mod+Shift+r		exec $term -e sudo ranger /
 
 bindsym $mod+t			split toggle
-#bindsym $mod+Shift+t
+bindsym $mod+Shift+t		move workspace to output right
 
 bindsym $mod+y			exec $term -e calcurse
 bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.scripts/i3resize left"
