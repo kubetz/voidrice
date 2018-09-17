@@ -14,13 +14,16 @@ gitrev="git rev-list --left-only --count"
 
 for repo in $repos
 do
+	# we hop into the repository and fetch all remotes (can be pretty slow *shrug*)
 	cd $repo/..; git fetch --all >/dev/null 2>&1
-	org=$($gitrev origin/master...@)
-	ups=$($gitrev upstream/master...@)
 
-	# if there are any remote changes, append name of the repo and..
-	# ..how many commits are we behind on both origin and usptream
-	[[ $org -ne 0 || $ups -ne 0 ]] && found+=" ${PWD##*/}($org|$ups)"
+	# get origin "diff" and if upstream is present, get that one too
+	org=$($gitrev origin/master...@)
+	ups=$(git remote -v | cut -f 1 | grep -q upstream && $gitrev upstream/master...@)
+
+	# format the output into "repository_name[origin_ahead(|upstream_ahead)]"
+	[[ $ups -ne 0 ]] && upstr="|$ups"
+	[[ $org -ne 0 || $upstr ]] && found+=" ${PWD##*/}($org$upstr)"
 done
 
 echo -n $found
