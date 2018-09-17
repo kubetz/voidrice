@@ -22,7 +22,7 @@ do
 	ups=$(git remote -v | cut -f 1 | grep -q upstream && $gitrev upstream/master...@)
 
 	# format the output into "repository_name[origin_ahead(|upstream_ahead)]"
-	[[ $ups -ne 0 ]] && upstr="|$ups"
+	[[ $ups -ne 0 ]] && upstr="|$ups" || upstr=""
 	[[ $org -ne 0 || $upstr ]] && found+=" ${PWD##*/}($org$upstr)"
 done
 
