@@ -89,11 +89,11 @@ bar {
       			inactive_workspace $darkblack $darkblack $white
         		urgent_workspace   $darkblack $darkblack $white
 		}
-	tray_output primary
 	status_command i3blocks
 	position top
 	mode dock
 	modifier None
+	tray_output DVI-D-0
 }
 
 # #---Basic Bindings---# #
