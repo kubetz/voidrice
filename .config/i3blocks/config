@@ -30,7 +30,7 @@ color=#D33682
 [repositories]
 label=🎪
 command=i3repocheck
-interval=300
+interval=3600
 color=#00FF00
 
 [weather]
