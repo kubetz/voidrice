@@ -35,14 +35,14 @@ alias pi="bash ~/.larbs/wizard/wizard.sh"
 # Adding color
 alias ls='ls -hN --color=auto --group-directories-first'
 alias crep="grep --color=always" # Color grep - highlight desired sequence.
-alias ccat="highlight --out-format=xterm256" #Color cat - print file with syntax highlighting.
+alias ccat="highlight --out-format=xterm256" # Color cat - print file with syntax highlighting.
 
 # Internet
 alias yt="youtube-dl --add-metadata -ic" # Download video link
 alias yta="youtube-dl --add-metadata -xic" # Download only audio
 alias YT="youtube-viewer"
-alias ethspeed="speedometer -r enp0s25"
-alias wifispeed="speedometer -r wlp3s0"
+alias ethspeed="speedometer -r enp4s0"
+alias wifispeed="speedometer -r wlp5s0"
 alias starwars="telnet towel.blinkenlights.nl"
 
 # TeX
