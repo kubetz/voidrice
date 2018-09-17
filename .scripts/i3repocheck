@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # directory that contains your git repositories
-devdir="/home/kubetz/Development"
+devdir="$HOME/Development"
 
 # connectivity check
 ping -q -w 1 -c 1 "$(ip r | grep default | tail -1 | cut -d ' ' -f 3)" >/dev/null || exit
