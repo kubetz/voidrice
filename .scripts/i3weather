@@ -10,8 +10,8 @@ ping -q -w 1 -c 1 "$(ip r | grep default | tail -1 | cut -d ' ' -f 3)" >/dev/nul
 
 curl -s wttr.in/$location > ~/.weatherreport
 
-printf "%s" "$(sed '4q;d' ~/.weatherreport | grep -o "m[0-9]\\+" | tr -d 'm' | sed -e "s/^/🌡️/g" | sed -e "s/$/°/g")"
+printf "%s" "$(sed '4q;d' ~/.weatherreport | grep -o "m[0-9]\\+" | sed -e '$!d' | tr -d 'm' | awk '{print "🌡️",$1 "°"}')"
 
 printf "%s" "$(sed '13q;d' ~/.weatherreport | grep -o "m[0-9]\\+" | sort -n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ❄️",$1 "°","☀️",$2 "°"}')"
 
-printf "%s" "$(sed '16q;d' ~/.weatherreport | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/ ☔ /g" | tr -d '\n')"
+printf "%s" "$(sed '16q;d' ~/.weatherreport | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/ ☔ /" | tr -d '\n')"
