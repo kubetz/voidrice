@@ -15,10 +15,15 @@ updateicon() { \
 	}
 
 killrecording() {
-	kill -9 "$(cat ~/.recordingpid)"
+	recpid="$(cat ~/.recordingpid)"
+	# kill with SIGTERM, allowing finishing touches.
+	kill -15 "$recpid"
 	rm -f ~/.recordingpid
 	updateicon ""
 	pkill -RTMIN+9 i3blocks
+	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
+	sleep 3
+	kill -9 "$recpid"
 	exit
 	}
 
@@ -63,7 +68,7 @@ audiopulse() { \
 	ffmpeg \
 	-f alsa -i default \
 	-c:a flac \
-	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').mkv" &
+	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
 	echo $! > ~/.recordingpid
 	updateicon "🎙️"
 	}
@@ -71,13 +76,18 @@ audiopulse() { \
 audioalsa() { \
 	ffmpeg -y \
 	-f alsa -ar 44100 -i hw:1 \
-	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').mkv" &
+	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
 	echo $! > ~/.recordingpid
 	updateicon "🎙️"
 	}
 
 askrecording() { \
-	printf "screencast\\nvideo\\naudio" | dmenu -i -p "Select recording style:"
+	choice=$(printf "screencast\\nvideo\\naudio" | dmenu -i -p "Select recording style:")
+	case "$choice" in
+		screencast) screencastpulse;;
+		audio) audiopulse;;
+		video) video;;
+	esac
 	}
 
 asktoend() { \
