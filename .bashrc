@@ -43,7 +43,7 @@ alias ccat="highlight --out-format=ansi" # Color cat - print file with syntax hi
 
 # Internet
 alias yt="youtube-dl --add-metadata -ic" # Download video link
-alias yta="youtube-dl --add-metadata -xic" # Download only audio
+alias yta="yt -x -f bestaudio/best" # Download only audio
 alias YT="youtube-viewer"
 alias ethspeed="speedometer -r enp4s0"
 alias wifispeed="speedometer -r wlp5s0"
